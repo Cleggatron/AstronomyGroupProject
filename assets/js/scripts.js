@@ -5,7 +5,6 @@ var lat
 var lon
 
 
-
 //this function makes a URL from the location that the user will input into the search bar. The URL is then assigned to the variable "endpointWeather"
 function generateEndpointWeather (city) {
     //event.preventDefault();  //stops the page from refreshing on submit   (commented out until connected to a button)
@@ -28,14 +27,36 @@ return fetch(endpointWeather) //fetches the data from the url
     return res.json(); //turns data into an object
 })
 .then(function(data) {
-    //console.log(data);
+    //console.log(data); //shows lat/lon
 
     //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
     lon = data.city.coord.lon
 
     lat = data.city.coord.lat
-}) 
+})
+.then(function getPlanets() {
+
+    endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
+
+    return fetch(endpointPlanets) //we then fetch this URL
+})
+.then(function (res) {
+
+    return res.json(); //the URL gets turned into an object
+})
+
+.then(function (data){
+
+    //console.log(data); //shows planets
+
+})
+
 }
+
+
+
+
+
 
 
 //function to update search history in local storage//
