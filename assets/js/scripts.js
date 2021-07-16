@@ -18,7 +18,7 @@ function generateEndpointWeather (city) {
 
 
 //this function takes the url in "endpointWeather" and fetches it. The data is then turned into an object, ready for us to use it however we please
-function makeRequestWeather () {
+function makeApiRequest () {
 //event.preventDefault(); //stops the page from refreshing    (commented out until connected to a button)
 
 return fetch(endpointWeather) //fetches the data from the url
@@ -34,7 +34,7 @@ return fetch(endpointWeather) //fetches the data from the url
 
     lat = data.city.coord.lat
 })
-.then(function getPlanets() {
+.then(function() {
 
     endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
 
