@@ -80,3 +80,16 @@ function updateSearchHistoryLS(searchInput){
     localStorage.setItem("searchHistory", JSON.stringify(searchHistoryLS));
 }
 
+
+
+//This function stores the functions that will be ran when the user clicks on the search button
+function clickSearchButton() {
+    //event.preventDefault(); //stops page refreshing  (commented out until button is added)
+
+    generateEndpointWeather();
+    makeApiRequest();
+
+}
+
+
+//placeHolderButtonName.addEventListener('click', clickSearchButton);    (commented out until html is added)
