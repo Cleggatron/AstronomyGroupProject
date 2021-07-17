@@ -80,3 +80,15 @@ function updateSearchHistoryLS(searchInput){
     localStorage.setItem("searchHistory", JSON.stringify(searchHistoryLS));
 }
 
+function populateSearchHistory(){
+    //var searchHistoryEl = document.getElementById("searchHistory");
+    //clear out search history
+    //searchHistoryEl.innerHTML = "";
+    var searchHistoryLs = json.parse(localStorage.getItem("searchHistory"));
+
+    for(var i = 0; i < searchHistoryLs.length; i++){
+        var text = document.createElement("p");
+        text.textContent = searchHistoryLs[i];
+        searchHistoryLs.append(text);
+    }
+}
