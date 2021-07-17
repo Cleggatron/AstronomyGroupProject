@@ -55,10 +55,6 @@ return fetch(endpointWeather) //fetches the data from the url
 
 
 
-
-
-
-
 //function to update search history in local storage//
 function updateSearchHistoryLS(searchInput){
     var searchHistoryLS = JSON.parse(localStorage.getItem("searchHistory"));
@@ -82,6 +78,22 @@ function updateSearchHistoryLS(searchInput){
 
 
 
+function populateSearchHistory(){
+    //var searchHistoryEl = document.getElementById("searchHistory");
+    //clear out search history
+    //searchHistoryEl.innerHTML = "";
+    var searchHistoryLs = json.parse(localStorage.getItem("searchHistory"));
+
+    for(var i = 0; i < searchHistoryLs.length; i++){
+        var text = document.createElement("p");
+        text.textContent = searchHistoryLs[i];
+        searchHistoryLs.append(text);
+    }
+}
+
+
+
+
 //This function stores the functions that will be ran when the user clicks on the search button
 function clickSearchButton() {
     //event.preventDefault(); //stops page refreshing  (commented out until button is added)
@@ -90,6 +102,5 @@ function clickSearchButton() {
     makeApiRequest();
 
 }
-
 
 //placeHolderButtonName.addEventListener('click', clickSearchButton);    (commented out until html is added)
