@@ -84,11 +84,11 @@ function populateSearchHistory(){
     //var searchHistoryEl = document.getElementById("searchHistory");
     //clear out search history
     //searchHistoryEl.innerHTML = "";
-    var searchHistory = json.parse(localStorage.getItem("searchHistory"));
+    var searchHistoryLs = json.parse(localStorage.getItem("searchHistory"));
 
-    for(var i = 0; i < searchHistory.length; i++){
+    for(var i = 0; i < searchHistoryLs.length; i++){
         var text = document.createElement("p");
-        text.textContent = searchHistory[i];
-        searchHistoryLS.append(text);
+        text.textContent = searchHistoryLs[i];
+        searchHistoryLs.append(text);
     }
 }
