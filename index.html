@@ -7,76 +7,60 @@
     <title>Clear Planet</title>
     <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="./assets/styles/styles.css"/>
-
-
-
-    
-
-
 </head>
-<header>
-<nav>
-    <form>
-            <input placeholder="your planetry search">
-        
-            <submit> search </submit>
-    </form>
-</nav>
-
-<button class="ui button">
-    Follow
-</button><button class="ui button">
-    Follow
-</button><button class="ui button">
-    Follow
-</button><button class="ui button">
-    Follow
-</button>
-
-</header>
-
-<div class="ui four column doubling stackable grid container">
-    <div class="column" id="red">
-      <p>dsafdsf</p>
-      <p></p>
-    </div>
-    <div class="column" id="green">
-      <p>dfssdfsadf</p>
-      <p></p>
-    </div>
-    <div class="column" id="blue">
-      <p>dfsdfsdf</p>
-      <p></p>
-    </div>
-    <div class="column" id="purple">
-      <p>adfdsfads</p>
-      <p></p>
-    </div>
-  </div>
-
-  <div class="ui four column doubling stackable grid container">
-    <div class="column" id="testID">
-      <p>dsafdsf</p>
-      <p>Placeholder</p>
-    </div>
-    <div class="column" id="testID2">
-      <p>dfssdfsadf</p>
-      <p>Placeholder</p>
-    </div>
-    <div class="column" id="testID3">
-      <p>dfsdfsdf</p>
-      <p>Placeholder</p>
-    </div>
-    <div class="column" id="testID4">
-      <p>adfdsfads</p>
-      <p>Placeholder</p>
-    </div>
-  </div>
 
 <body>
+  <header>
+    <h1>Page Title</h1>
+  </header>
+  
+  <div class="ui grid">
+    <div class="four wide column" id="searchDiv">
+      <form>
+        <input type="text" placeholder="Location Search" id="searchBox" name="searchBox">
+        <label for="searchBox">Search For Your Location</label>
+        <input type="submit" value="Search">
+      </form>
 
+      <div id="searchHistoryDiv">
+
+      </div>
+      
+    </div>
+
+    <div class="twelve wide column" id="contentDiv">
+      <div class="ui grid" id="weatherDiv">
+        <div class="five wide column">Temp:</div>
+        <div class="five wide column">Weather Condition</div>
+        <div class="six wide column">Weather Icon</div>
+      </div>
+    
+      <div class="ui grid">
+        <h3 class="sixteen wide column">PlanetName</h3>
+        <div class="five wide column">
+          <p>Planet Info 1</p>
+          <p>Planet Info 2</p>
+          <p>Planet Info 3</p>
+        </div>
+        <div class="five wide column">
+          <h3>Planet Bio</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam unde saepe explicabo enim harum deleniti nihil quo asperiores ea at?</p>
+        </div>
+        <div class="six wide column">
+          <img src="#" alt="Placeholder Image">
+        </div>
+      </div>
     
 
-    <script src="assets/js/scripts.js"></script>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  
+  
+  <script src="assets/js/scripts.js"></script>
 </body>
 </html>
