@@ -1,3 +1,11 @@
+nav {
+    position: fixed;
+    width: 100%;
+    transition: top 0.3s;
+    
+}
+
+
 #purple {
     background-color: purple;
 }
