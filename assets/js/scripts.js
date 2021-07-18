@@ -68,7 +68,7 @@ function updateSearchHistoryLS(searchInput){
         searchHistoryLS.unshift(searchInput)
     }
     localStorage.setItem("searchHistory", JSON.stringify(searchHistoryLS));
-}git
+}
 
 // populates our search history to-do update variable name for search history.
 function populateSearchHistory(){
