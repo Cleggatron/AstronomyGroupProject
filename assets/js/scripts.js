@@ -94,31 +94,36 @@ function clickSearchButton() {
 }
 
 //function to build the content of our planet cards. to-do "will need content fixing", "will need to check the contentDivEl"
-function buildCards(){
-    var contentDivEl = document.getElementById("contentDiv");
-    var planetCardEl = document.createElement("div");
-    planetCardEl.setAttribute("class", "ui grid");
-    contentDivEl.appendChild(planetCardEl);
+function buildCards(planetData){
+    var contentDivEl = document.getElementById("planetCardContainer");
+    contentDivEl.innerHTML = "";
+    
+    for(var i = 0; i < planetData.length; i++){
+        var planetCardEl = document.createElement("div");
+        planetCardEl.setAttribute("class", "ui grid");
+        contentDivEl.appendChild(planetCardEl);
 
-    var planetNameEl = document.createElement("h3");
-    planetNameEl.textContent = "Planet Name" //Use a variable from our data
-    planetCardEl.appendChild(planetNameEl);
+        var planetNameEl = document.createElement("h3");
+        planetNameEl.textContent = "Planet Name" //Use a variable from our data
+        planetNameEl.setAttribute("class", "sixteen wide column");
+        planetCardEl.appendChild(planetNameEl);
 
-    var planetInfoEl = document.createElement("div");
-    planetInfoEl.setAttribute("class", "five wide column");
-    planetInfoEl.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia placeat nobis iusto consequatur ducimus corrupti earum laudantium ut similique repellendus?"
-    planetCardEl.appendChild(planetInfoEl);
+        var planetInfoEl = document.createElement("div");
+        planetInfoEl.setAttribute("class", "five wide column");
+        planetInfoEl.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia placeat nobis iusto consequatur ducimus corrupti earum laudantium ut similique repellendus?"
+        planetCardEl.appendChild(planetInfoEl);
 
-    var planetBioEl = document.createElement("div");
-    planetBioEl.setAttribute("class", "five wide column");
-    planetBioEl.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia placeat nobis iusto consequatur ducimus corrupti earum laudantium ut similique repellendus?"
-    planetCardEl.appendChild(planetBioEl);
+        var planetBioEl = document.createElement("div");
+        planetBioEl.setAttribute("class", "five wide column");
+        planetBioEl.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia placeat nobis iusto consequatur ducimus corrupti earum laudantium ut similique repellendus?"
+        planetCardEl.appendChild(planetBioEl);
 
-    var planetImgEl = document.createElement("img");
-    planetImgEl.setAttribute("class", "six wide column");
-    planetImgEl.setAttribute("src", "#");//use a variable for our img source
-    planetImgEl.setAttribute("alt", "Picture of"); //add the alt text with a variable
-    planetCardEl.appendChild(planetImgEl);
+        var planetImgEl = document.createElement("img");
+        planetImgEl.setAttribute("class", "six wide column");
+        planetImgEl.setAttribute("src", "#");//use a variable for our img source
+        planetImgEl.setAttribute("alt", "Picture of"); //add the alt text with a variable
+        planetCardEl.appendChild(planetImgEl);
+    }
 
 }
 
