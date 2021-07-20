@@ -32,3 +32,15 @@ nav {
 #testID4{
     background-color: orange;
 }
+
+
+
+/* Hides whatever element has this class */
+.hidden {
+    display: none;
+}
+
+/* Shows whatever element has this class */
+.show {
+    display: auto;
+}

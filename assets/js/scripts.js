@@ -2,6 +2,9 @@ var searchFormEl = document.querySelector("form")
 var searchBoxEl = document.querySelector("#searchBox")
 var lat = 0;
 var lon = 0;
+var weatherTempEL = document.getElementById('weatherTemp');
+var weatherConditionEL = document.getElementById('weatherCondition');
+var weatherIconEL = document.getElementById('weatherIcon');
 
 
 //this function makes a URL from the location that the user will input into the search bar. The URL is then assigned to the variable "endpointWeather"
@@ -28,6 +31,14 @@ return fetch(weatherUrl) //fetches the data from the url
     //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
     lon = weatherData.city.coord.lon
     lat = weatherData.city.coord.lat
+
+
+    //this code adds weather data from the API to the the elements in our html
+    weatherConditionEL.innerText = weatherData.list[0].weather[0].main
+    weatherTempEL.innerText = weatherData.list[0].main.temp
+    var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
+    var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
+    weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
 })
 .then(function() {
 
