@@ -5,6 +5,7 @@ var lon = 0;
 var weatherTempEL = document.getElementById('weatherTemp');
 var weatherConditionEL = document.getElementById('weatherCondition');
 var weatherIconEL = document.getElementById('weatherIcon');
+var searchHistoryEl = document.getElementById('searchHistoryDiv')
 
 
 var planetList = {
@@ -161,4 +162,19 @@ function buildCards(planetData){
 
 }
 
-searchFormEl.addEventListener('submit', clickSearchButton);    
+function clickSearchHistory(event){
+    event.preventDefault;
+    var eventTarget = event.target;
+    
+    if(eventTarget.matches("p")){
+        var searchCity = eventTarget.textContent;
+        var weatherURL = generateEndpointWeather(searchCity);
+        makeApiRequest(weatherURL);
+        updateSearchHistoryLS(searchCity)
+        populateSearchHistory();
+    }
+}
+
+searchFormEl.addEventListener('submit', clickSearchButton);
+searchHistoryEl.addEventListener("click", clickSearchHistory);
+populateSearchHistory();
