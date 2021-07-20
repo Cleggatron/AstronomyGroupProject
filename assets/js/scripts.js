@@ -137,7 +137,7 @@ function buildCards(planetData){
 
         var planetImgEl = document.createElement("img");
         planetImgEl.setAttribute("class", "six wide column");
-        planetImgEl.setAttribute("src", "#");//use a variable for our img source
+        planetImgEl.setAttribute("src"  , `./assets/img/planet-img/${planetData.data[i].name}.jpg`);//use a variable for our img source `${lon}`  
         planetImgEl.setAttribute("alt", "Picture of"); //add the alt text with a variable
         planetCardEl.appendChild(planetImgEl);
     }
