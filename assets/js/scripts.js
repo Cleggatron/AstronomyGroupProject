@@ -43,7 +43,7 @@ return fetch(weatherUrl) //fetches the data from the url
 .then(function (apiPlanetData){
 
     console.log(apiPlanetData); //shows planets
-
+    buildCards(apiPlanetData)
 })
 
 }
@@ -102,7 +102,7 @@ function buildCards(planetData){
     var contentDivEl = document.getElementById("planetCardContainer");
     contentDivEl.innerHTML = "";
     
-    for(var i = 0; i < planetData.length; i++){
+    for(var i = 0; i < planetData.data.length; i++){
         var planetCardEl = document.createElement("div");
         planetCardEl.setAttribute("class", "ui grid");
         contentDivEl.appendChild(planetCardEl);
