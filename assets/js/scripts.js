@@ -53,7 +53,7 @@ return fetch(weatherUrl) //fetches the data from the url
 
 .then(function (apiPlanetData){
 
-    console.log(apiPlanetData); //shows planets
+   // console.log(apiPlanetData); //shows planets
     buildCards(apiPlanetData)
 })
 
@@ -112,14 +112,16 @@ function clickSearchButton(event) {
 function buildCards(planetData){
     var contentDivEl = document.getElementById("planetCardContainer");
     contentDivEl.innerHTML = "";
-    
-    for(var i = 0; i < planetData.data.length; i++){
-        var planetCardEl = document.createElement("div");
-        planetCardEl.setAttribute("class", "ui grid");
-        contentDivEl.appendChild(planetCardEl);
+    console.log(planetData)
+
+    for(var i = 0; i < planetData.data.length; i++){  //We loop this for the amount of planets visible to the user
+        
+        var planetCardEl = document.createElement("div");  //we make a div container for each card
+        planetCardEl.setAttribute("class", "ui grid"); //we then set some classes to the div in order to position it
+        contentDivEl.appendChild(planetCardEl); //we finally assign the div container to the planet card container of all the divs
 
         var planetNameEl = document.createElement("h3");
-        planetNameEl.textContent = "Planet Name" //Use a variable from our data
+        planetNameEl.textContent = planetData.data[i].name //Use a variable from our data
         planetNameEl.setAttribute("class", "sixteen wide column");
         planetCardEl.appendChild(planetNameEl);
 
