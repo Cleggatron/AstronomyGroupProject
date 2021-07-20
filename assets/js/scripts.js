@@ -7,6 +7,23 @@ var weatherConditionEL = document.getElementById('weatherCondition');
 var weatherIconEL = document.getElementById('weatherIcon');
 
 
+var planetList = {
+
+    
+    Mercury: "Mercury is the closest planet to the sun, and so its year cycle is only a mere 88 days. It's also the smallest of the planets, being only slightly larger than Earth's moon.",
+    Venus: "Venus is the second closest planet to the sun, and is relatively near equal in size to Earth. Venus has a thick, toxic atmospere made of sulfuric acid clouds, this causes the temperature to average at 465°C due to the greenhouse effect.",
+    Mars: "Mars is the fourth planet from the sun, it's cold and desert-like, being covered in dust. The red hue of Mars is caused by the dust being made of iron oxides. It's possible that rivers or even oceans existed at some point on Mars' surface.",
+    Jupiter: "Jupiter is the fifth planet from the sun, and is the largest in our solar system; being more than twice the size of all of them combined. On Jupiter there is a giant storm more than 10,000 miles wide, that has been raging for the last 150 years.",
+    Saturn: "Saturn is the sixth planet from the sun, and is known mostly for its rings made of ice and rock. Each year on Saturn lasts roughly 30 of Earth's years.",
+    Uranus: "Uranus is the seventh planet from the sun. Uranus is tilted at a right angle and orbits on its side, due to this its seasons can last for 20+ Earth-years, and the sun can beat down on its poles for 84 Earth-years at a time.",
+    Neptune: "Neptune is the eighth planet from the sun, and is known for its wind speeds of over 700 mph. Neptune is the first planet to have been predicted to exist purely through mathematic calculations.",
+    Moon: "Our moon is roughly a quater of the size of Earth, and is even bigger than Pluto. It's theorised that the Moon was once a part of Earth, however was torn off due to a collision back when Earth was little more than molten rock." 
+
+}
+
+
+
+
 //this function makes a URL from the location that the user will input into the search bar. The URL is then assigned to the variable "endpointWeather"
 function generateEndpointWeather (city) {
      //makes a variable and assigns it whatever the user types into the search box
@@ -132,7 +149,7 @@ function buildCards(planetData){
 
         var planetBioEl = document.createElement("div");
         planetBioEl.setAttribute("class", "five wide column");
-        planetBioEl.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia placeat nobis iusto consequatur ducimus corrupti earum laudantium ut similique repellendus?"
+        planetBioEl.textContent = planetList[planetData.data[i].name]
         planetCardEl.appendChild(planetBioEl);
 
         var planetImgEl = document.createElement("img");
