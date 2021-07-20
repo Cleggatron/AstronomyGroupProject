@@ -6,7 +6,8 @@ var weatherTempEL = document.getElementById('weatherTemp');
 var weatherConditionEL = document.getElementById('weatherCondition');
 var weatherIconEL = document.getElementById('weatherIcon');
 var weatherTempDivEL = document.getElementById('weatherTempDiv')
-var weatherConditionDivEL = document.getElementById('weatherConditionDiv')
+var weatherConditionDivEL = document.getElementById('weatherConditionDiv')   
+var searchHistoryEl = document.getElementById('searchHistoryDiv')
 
 
 //This is an object of all the planet descriptions and facts. This is so that we can then access it later in our generate card function
@@ -144,7 +145,7 @@ function buildCards(planetData){
     for(var i = 0; i < planetData.data.length; i++){  //We loop this for the amount of planets visible to the user
         
         var planetCardEl = document.createElement("div");  //we make a div container for each card
-        planetCardEl.setAttribute("class", "ui grid"); //we then set some classes to the div in order to position it
+        planetCardEl.setAttribute("class", "ui grid planetcard"); //we then set some classes to the div in order to position it
         contentDivEl.appendChild(planetCardEl); //we finally assign the div container to the planet card container of all the divs
 
         var planetNameEl = document.createElement("h3");
@@ -171,4 +172,19 @@ function buildCards(planetData){
 
 }
 
-searchFormEl.addEventListener('submit', clickSearchButton);    
+function clickSearchHistory(event){
+    event.preventDefault;
+    var eventTarget = event.target;
+    
+    if(eventTarget.matches("p")){
+        var searchCity = eventTarget.textContent;
+        var weatherURL = generateEndpointWeather(searchCity);
+        makeApiRequest(weatherURL);
+        updateSearchHistoryLS(searchCity)
+        populateSearchHistory();
+    }
+}
+
+searchFormEl.addEventListener('submit', clickSearchButton);
+searchHistoryEl.addEventListener("click", clickSearchHistory);
+populateSearchHistory();

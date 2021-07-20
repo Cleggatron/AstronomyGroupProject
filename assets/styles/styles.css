@@ -1,38 +1,14 @@
-nav {
-    position: fixed;
-    width: 100%;
-    transition: top 0.3s;
+.planetcard { 
+    background-color: gold;
     
-}
 
+} 
 
-#purple {
-    background-color: purple;
+.planetcard:hover {
+    box-shadow: 100px 100px 100px 100px black;
+    border: 9px solid silver;
+    animation: glow 1s ease-in-out infinite alternate;
 }
-#red {
-    background-color: red;
-}
-
-#green {
-    background-color: green;
-}
-#blue {
-    background-color: blue;
-}
-
-#testID{
-    background-color: purple;
-}
-#testID2{
-    background-color: lavender;
-}
-#testID3{
-    background-color: greenyellow;
-}
-#testID4{
-    background-color: orange;
-}
-
 
 
 /* Hides whatever element has this class */
