@@ -134,7 +134,7 @@ function buildCards(planetData){
     for(var i = 0; i < planetData.data.length; i++){  //We loop this for the amount of planets visible to the user
         
         var planetCardEl = document.createElement("div");  //we make a div container for each card
-        planetCardEl.setAttribute("class", "ui grid"); //we then set some classes to the div in order to position it
+        planetCardEl.setAttribute("class", "ui grid planetcard"); //we then set some classes to the div in order to position it
         contentDivEl.appendChild(planetCardEl); //we finally assign the div container to the planet card container of all the divs
 
         var planetNameEl = document.createElement("h3");
