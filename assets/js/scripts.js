@@ -5,8 +5,11 @@ var lon = 0;
 var weatherTempEL = document.getElementById('weatherTemp');
 var weatherConditionEL = document.getElementById('weatherCondition');
 var weatherIconEL = document.getElementById('weatherIcon');
+var weatherTempDivEL = document.getElementById('weatherTempDiv')
+var weatherConditionDivEL = document.getElementById('weatherConditionDiv')
 
 
+//This is an object of all the planet descriptions and facts. This is so that we can then access it later in our generate card function
 var planetList = {
 
     
@@ -56,6 +59,13 @@ return fetch(weatherUrl) //fetches the data from the url
     var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
     var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
     weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
+
+
+    weatherTempDivEL.classList.remove('invisible')
+    weatherConditionDivEL.classList.remove('invisible')
+
+    weatherIconEL.classList.remove('hidden')
+
 })
 .then(function() {
 
