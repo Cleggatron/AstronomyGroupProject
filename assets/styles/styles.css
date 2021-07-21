@@ -20,3 +20,13 @@
 .show {
     display: auto;
 }
+
+/* Also hides the element, but this shouldn't interfere with any display changers */
+.invisible {
+    visibility: hidden;
+}
+
+/* Shows the element, but doesn't interfere with display */
+.visible {
+    visibility: visible;
+}
