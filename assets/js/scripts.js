@@ -6,11 +6,10 @@ var weatherTempEL = document.getElementById('weatherTemp');
 var weatherConditionEL = document.getElementById('weatherCondition');
 var weatherIconEL = document.getElementById('weatherIcon');
 var searchHistoryEl = document.getElementById('searchHistoryDiv')
+var errorBoxEl =  document.getElementById("errorBox");
 
 
 var planetList = {
-
-    
     Mercury: "Mercury is the closest planet to the sun, and so its year cycle is only a mere 88 days. It's also the smallest of the planets, being only slightly larger than Earth's moon.",
     Venus: "Venus is the second closest planet to the sun, and is relatively near equal in size to Earth. Venus has a thick, toxic atmospere made of sulfuric acid clouds, this causes the temperature to average at 465°C due to the greenhouse effect.",
     Mars: "Mars is the fourth planet from the sun, it's cold and desert-like, being covered in dust. The red hue of Mars is caused by the dust being made of iron oxides. It's possible that rivers or even oceans existed at some point on Mars' surface.",
@@ -19,17 +18,14 @@ var planetList = {
     Uranus: "Uranus is the seventh planet from the sun. Uranus is tilted at a right angle and orbits on its side, due to this its seasons can last for 20+ Earth-years, and the sun can beat down on its poles for 84 Earth-years at a time.",
     Neptune: "Neptune is the eighth planet from the sun, and is known for its wind speeds of over 700 mph. Neptune is the first planet to have been predicted to exist purely through mathematic calculations.",
     Moon: "Our moon is roughly a quater of the size of Earth, and is even bigger than Pluto. It's theorised that the Moon was once a part of Earth, however was torn off due to a collision back when Earth was little more than molten rock." 
-
 }
-
-
 
 
 //this function makes a URL from the location that the user will input into the search bar. The URL is then assigned to the variable "endpointWeather"
 function generateEndpointWeather (city) {
      //makes a variable and assigns it whatever the user types into the search box
     
-    var endpointWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=aa891061c4eb5441b7aab33d1b619398&units=metric` //makes a global scope variable and assigns the URL to it. The URL will include the value of the "city" variable
+    var endpointWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=aa891061c4eb5441b7aab33d1b619398&units=metric` 
 
     return endpointWeather;
 
@@ -38,42 +34,42 @@ function generateEndpointWeather (city) {
 //this function takes the url in "endpointWeather" and fetches it. The data is then turned into an object, ready for us to use it however we please
 function makeApiRequest (weatherUrl) {
 
-return fetch(weatherUrl) //fetches the data from the url
-.then(function(res) {
+    return fetch(weatherUrl) //fetches the data from the url
+    .then(function(res) {
 
-    return res.json(); //turns data into an object
-})
-.then(function(weatherData) {
-    console.log(weatherData); //shows lat/lon
+        return res.json(); //turns data into an object
+    })
+    .then(function(weatherData) {
+        console.log(weatherData); //shows lat/lon
 
-    //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
-    lon = weatherData.city.coord.lon
-    lat = weatherData.city.coord.lat
+        //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
+        lon = weatherData.city.coord.lon
+        lat = weatherData.city.coord.lat
 
 
-    //this code adds weather data from the API to the the elements in our html
-    weatherConditionEL.innerText = weatherData.list[0].weather[0].main
-    weatherTempEL.innerText = weatherData.list[0].main.temp
-    var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
-    var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
-    weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
-})
-.then(function() {
+        //this code adds weather data from the API to the the elements in our html
+        weatherConditionEL.innerText = weatherData.list[0].weather[0].main
+        weatherTempEL.innerText = weatherData.list[0].main.temp
+        var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
+        var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
+        weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
+    })
+    .then(function() {
 
-    var endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
+        var endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
 
-    return fetch(endpointPlanets) //we then fetch this URL
-})
-.then(function (res) {
+        return fetch(endpointPlanets) //we then fetch this URL
+    })
+    .then(function (res) {
 
-    return res.json(); //the URL gets turned into an object
-})
+        return res.json(); //the URL gets turned into an object
+    })
 
-.then(function (apiPlanetData){
+    .then(function (apiPlanetData){
 
-   // console.log(apiPlanetData); //shows planets
-    buildCards(apiPlanetData)
-})
+        console.log(apiPlanetData); //shows planets
+        buildCards(apiPlanetData)
+    })
 
 }
 
@@ -117,7 +113,13 @@ function clickSearchButton(event) {
     event.preventDefault(); //stops page refreshing  
 
     var searchedCity = searchBoxEl.value;
-    console.log(searchedCity);
+    
+    //handles any blank input
+    if(searchedCity === ""){
+        errorBoxEl.textContent = "You have not entered a location!"
+        return;
+    }
+    errorBoxEl.textContent = "";
 
     var weatherURL = generateEndpointWeather(searchedCity);
     makeApiRequest(weatherURL);
@@ -165,6 +167,9 @@ function buildCards(planetData){
 function clickSearchHistory(event){
     event.preventDefault;
     var eventTarget = event.target;
+
+    //removes old errorm message
+    errorBoxEl.textContent = "";
     
     if(eventTarget.matches("p")){
         var searchCity = eventTarget.textContent;
