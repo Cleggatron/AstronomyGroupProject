@@ -82,7 +82,7 @@ function makeApiRequest (weatherUrl) {
 
     .then(function (apiPlanetData){
 
-        console.log(apiPlanetData); //shows planets
+       // console.log(apiPlanetData); //shows planets
         buildCards(apiPlanetData)
     })
 
@@ -126,12 +126,15 @@ function populateSearchHistory(){
 //This function stores the functions that will be ran when the user clicks on the search button
 function clickSearchButton(event) {
     event.preventDefault(); //stops page refreshing  
-
+   
     var searchedCity = searchBoxEl.value;
     
     //handles any blank input
-    if(searchedCity === ""){
+    if(searchedCity === ""){ //if the search box is empty then give the user an error message
         errorBoxEl.textContent = "You have not entered a location!"
+        return; //returns out the code so that it's not saved to history
+    } else if (lon == 0 && lat == 0) { //if the latitude and longitude of the location is both 0 that means they haven't put in a correct location
+        errorBoxEl.textContent = "Please enter a valid location!"
         return;
     }
     errorBoxEl.textContent = "";
