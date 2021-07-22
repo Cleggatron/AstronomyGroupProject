@@ -45,11 +45,14 @@ function makeApiRequest (weatherUrl) {
     .then(function(weatherData) {
         console.log(weatherData); //shows lat/lon
 
+        if (weatherData.city === undefined) { //if the city is not inside the api then the user gets a message asking them to enter a valid location
+            errorBoxEl.textContent = "Please enter a valid location!"
+            return; 
+        } 
+        
         //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
         lon = weatherData.city.coord.lon
         lat = weatherData.city.coord.lat
-
-
 
     //this code adds weather data from the API to the the elements in our html
     weatherConditionEL.innerText = weatherData.list[0].weather[0].main
@@ -70,7 +73,7 @@ function makeApiRequest (weatherUrl) {
     })
     .then(function() {
 
-
+      
         var endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
 
         return fetch(endpointPlanets) //we then fetch this URL
@@ -133,10 +136,7 @@ function clickSearchButton(event) {
     if(searchedCity === ""){ //if the search box is empty then give the user an error message
         errorBoxEl.textContent = "You have not entered a location!"
         return; //returns out the code so that it's not saved to history
-    } else if (lon == 0 && lat == 0) { //if the latitude and longitude of the location is both 0 that means they haven't put in a correct location
-        errorBoxEl.textContent = "Please enter a valid location!"
-        return;
-    }
+    } 
     errorBoxEl.textContent = "";
 
     var weatherURL = generateEndpointWeather(searchedCity);
