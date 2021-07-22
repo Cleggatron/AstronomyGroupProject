@@ -30,3 +30,9 @@
 .visible {
     visibility: visible;
 }
+
+/* Changes the cursor to a pointer when hovering over seatch history items */
+#searchHistoryDiv p {
+    cursor: pointer;
+}
+
