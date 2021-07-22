@@ -135,6 +135,10 @@ function clickSearchButton(event) {
     event.preventDefault(); //stops page refreshing  
 
     var searchedCity = searchBoxEl.value;
+
+    var planetCardContainerEl = document.getElementById("planetCardContainer")
+    planetCardContainerEl.innerHTML = "";
+
     
     //handles any blank input
     if(searchedCity === ""){
