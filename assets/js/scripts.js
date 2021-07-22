@@ -37,55 +37,62 @@ function generateEndpointWeather (city) {
 //this function takes the url in "endpointWeather" and fetches it. The data is then turned into an object, ready for us to use it however we please
 function makeApiRequest (weatherUrl) {
 
-    return fetch(weatherUrl) //fetches the data from the url
+    fetch(weatherUrl) //fetches the data from the url
+    
     .then(function(res) {
 
-        return res.json(); //turns data into an object
-    })
-    .then(function(weatherData) {
-        console.log(weatherData); //shows lat/lon
+        if(res.ok){
+            res.json()
+            .then(function(weatherData) {
+                console.log(weatherData); //shows lat/lon
+        
+                //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
+                lon = weatherData.city.coord.lon
+                lat = weatherData.city.coord.lat
+        
+            //this code adds weather data from the API to the the elements in our html
+            weatherConditionEL.innerText = weatherData.list[0].weather[0].main
+            weatherTempEL.innerText = weatherData.list[0].main.temp
+            var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
+            var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
+            weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
+        
+            weatherTempDivEL.classList.remove('invisible')
+            weatherConditionDivEL.classList.remove('invisible')
+            weatherIconEL.classList.remove('hidden')
+            //this code adds weather data from the API to the the elements in our html
+            weatherConditionEL.innerText = weatherData.list[0].weather[0].main
+            weatherTempEL.innerText = weatherData.list[0].main.temp
+            var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
+            var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
+            weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
+            })
+            .then(function() {
+        
+                var endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
+        
+                return fetch(endpointPlanets) //we then fetch this URL
+            })
+            .then(function (res) {
+        
+                return res.json(); //the URL gets turned into an object
+            })
+        
+            .then(function (apiPlanetData){
+        
+                console.log(apiPlanetData); //shows planets
+                buildCards(apiPlanetData)
+            })
+        } else {
+            errorBoxEl.textContent = "Please Enter A Valid Location"
 
-        //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
-        lon = weatherData.city.coord.lon
-        lat = weatherData.city.coord.lat
-
-
-
-    //this code adds weather data from the API to the the elements in our html
-    weatherConditionEL.innerText = weatherData.list[0].weather[0].main
-    weatherTempEL.innerText = weatherData.list[0].main.temp
-    var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
-    var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
-    weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
-
-    weatherTempDivEL.classList.remove('invisible')
-    weatherConditionDivEL.classList.remove('invisible')
-    weatherIconEL.classList.remove('hidden')
-    //this code adds weather data from the API to the the elements in our html
-    weatherConditionEL.innerText = weatherData.list[0].weather[0].main
-    weatherTempEL.innerText = weatherData.list[0].main.temp
-    var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
-    var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
-    weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
-    })
-    .then(function() {
-
-
-        var endpointPlanets = `https://visible-planets-api.herokuapp.com/v2?latitude=${lat}&longitude=${lon}&showCoords=true` //gets a new URL and assigns it to the variable endpointPlanets. The URL changes based on the lat and lon
-
-        return fetch(endpointPlanets) //we then fetch this URL
-    })
-    .then(function (res) {
-
-        return res.json(); //the URL gets turned into an object
-    })
-
-    .then(function (apiPlanetData){
-
-        console.log(apiPlanetData); //shows planets
-        buildCards(apiPlanetData)
-    })
-
+            //hide our weather data.
+            weatherTempDivEL.classList.add('invisible')
+            weatherConditionDivEL.classList.add('invisible')
+            weatherIconEL.classList.add('hidden')
+        }
+            
+    }) 
 }
 
 //function to update search history in local storage. to-do check where we are getting input.
@@ -193,6 +200,11 @@ function buildCards(planetData){
 function clickSearchHistory(event){
     event.preventDefault;
     var eventTarget = event.target;
+    
+    //clear previous data
+    var planetCardContainerEl = document.getElementById("planetCardContainer")
+    planetCardContainerEl.innerHTML = "";
+
 
     //removes old errorm message
     errorBoxEl.textContent = "";
@@ -200,6 +212,7 @@ function clickSearchHistory(event){
     if(eventTarget.matches("p")){
         var searchCity = eventTarget.textContent;
         var weatherURL = generateEndpointWeather(searchCity);
+        
         makeApiRequest(weatherURL);
         updateSearchHistoryLS(searchCity)
         populateSearchHistory();
