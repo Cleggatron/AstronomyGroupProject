@@ -88,3 +88,19 @@ margin: 12rem;
 .show {
     display: auto;
 }
+
+/* Also hides the element, but this shouldn't interfere with any display changers */
+.invisible {
+    visibility: hidden;
+}
+
+/* Shows the element, but doesn't interfere with display */
+.visible {
+    visibility: visible;
+}
+
+/* Changes the cursor to a pointer when hovering over seatch history items */
+#searchHistoryDiv p {
+    cursor: pointer;
+}
+

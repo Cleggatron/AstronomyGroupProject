@@ -21,7 +21,12 @@
         <form>
           <input type="text" placeholder="Location Search" id="searchBox" name="searchBox">
           <label for="searchBox">Search For Your Location</label>
+
           <input type="submit" class="submitstyle" value="Search">
+
+          <input type="submit" value="Search">
+          <p id="errorBox"></p>
+
         </form>
 
         <div id="searchHistoryDiv">
@@ -33,10 +38,12 @@
       
       <div class="twelve wide column " id="contentDiv">
         <div class="ui grid" id="weatherDiv">
+
           <h2>Your weather conditions for </h2>
-          <div class="five wide column">Temp: <span id="weatherTemp"></span>°C</div>
-          <div class="five wide column">Weather Condition: <span id="weatherCondition"></span></div>
-          <div class="six wide column"><img src="" alt="an image of the current weather conditions" id="weatherIcon"></div>
+          <div id="weatherTempDiv" class="five wide column invisible">Temp: <span id="weatherTemp"></span>°C</div>
+          <div id="weatherConditionDiv" class="five wide column invisible">Weather Condition: <span id="weatherCondition"></span></div>
+          <div class="six wide column"><img class="hidden" src="" alt="an image of the current weather conditions" id="weatherIcon"></div>
+
         </div>
       
         <!--The below is a placeholder for demo purposes. all of this will be created dynamically-->
