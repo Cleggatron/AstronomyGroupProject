@@ -9,6 +9,7 @@ var weatherTempDivEL = document.getElementById('weatherTempDiv')
 var weatherConditionDivEL = document.getElementById('weatherConditionDiv')   
 var searchHistoryEl = document.getElementById('searchHistoryDiv')
 var errorBoxEl =  document.getElementById("errorBox");
+var yourcity= document.getElementById("city")
 
 
 //This is an object of all the planet descriptions and facts. This is so that we can then access it later in our generate card function
@@ -62,6 +63,8 @@ function makeApiRequest (weatherUrl) {
             weatherConditionDivEL.classList.remove('invisible')
             weatherIconEL.classList.remove('hidden')
             //this code adds weather data from the API to the the elements in our html
+            console.log(weatherData.city.name)
+            yourcity.innerText = weatherData.city.name
             weatherConditionEL.innerText = weatherData.list[0].weather[0].main
             weatherTempEL.innerText = weatherData.list[0].main.temp
             var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather

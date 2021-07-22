@@ -21,21 +21,14 @@ h1 {
       
 }
 
+.weathertitlebox{
+    display: inline-block;
+    background-color: cadetblue;
+}
 h2{ font-size: 24px;
     font-weight: bold;
     font-style: italic;
     text-align: center;
-   
-        color: #fff;
-        text-shadow:
-          0 0 7px #fff,
-          0 0 10px #fff,
-          0 0 21px #fff,
-          0 0 42px gold,
-          0 0 82px gold,
-          0 0 92px gold,
-          0 0 102px gold,
-          0 0 151px gold;
 
 }
 
@@ -45,7 +38,7 @@ h2{ font-size: 24px;
 
 #weatherDiv{
 background-color:silver;
-border: 9px dashed gold;
+border: 3px solid gold;
 box-shadow: 5px 5px 5px white;
 margin: 12rem;
 }
@@ -53,7 +46,7 @@ margin: 12rem;
 
 #searchDiv{
     background-color: silver;
-    border: 9px dashed gold;  
+    border: 3px solid gold;  
     box-shadow: 5px 5px 5px white;
     margin-bottom: 12rem;
 }
@@ -68,13 +61,13 @@ margin: 12rem;
 
 .planetcard { 
     background-color:silver;
-    border: 9px dashed gold;
+    border: 3px solid gold;
     box-shadow: 5px 5px 5px white;
 } 
 
 .planetcard:hover {
-    box-shadow: 100px 100px 100px 100px gold;
-    border: 9px dashed white;
+    box-shadow: 0px 0px 100px gold;
+    border: 3px solid white;
     animation: glow 1s ease-in-out infinite alternate;
 }
 
