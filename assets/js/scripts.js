@@ -34,6 +34,7 @@ return fetch(weatherUrl) //fetches the data from the url
 
 
     //this code adds weather data from the API to the the elements in our html
+    
     weatherConditionEL.innerText = weatherData.list[0].weather[0].main
     weatherTempEL.innerText = weatherData.list[0].main.temp
     var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
