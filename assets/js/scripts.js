@@ -162,7 +162,18 @@ function buildCards(planetData){
 
         var planetInfoEl = document.createElement("div");
         planetInfoEl.setAttribute("class", "five wide column");
-        planetInfoEl.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia placeat nobis iusto consequatur ducimus corrupti earum laudantium ut similique repellendus?"
+        var planetLocationEl = document.createElement("h3");
+        planetLocationEl.textContent = "Planet Location"
+        
+        var rightAscensionEl = document.createElement("p")
+        rightAscensionEl.textContent = "Right Ascension: " + planetData.data[i].rightAscension.hours + " Hours " + planetData.data[i].rightAscension.minutes + " Minutes " + planetData.data[i].rightAscension.seconds + " Seconds";
+        
+        var declinationEl = document.createElement("p")
+        declinationEl.textContent = "Declination: " + planetData.data[i].declination.degrees + " Degrees."
+
+        planetInfoEl.appendChild(planetLocationEl);
+        planetInfoEl.appendChild(rightAscensionEl);
+        planetInfoEl.appendChild(declinationEl);
         planetCardEl.appendChild(planetInfoEl);
 
         var planetBioEl = document.createElement("div");
