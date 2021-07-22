@@ -1,12 +1,80 @@
-.planetcard { 
-    background-color: gold;
-    
+body {
+    background-image: url("../img/utility-img/starysky.jpg")
+}
 
+h1 {
+    font-size: 72px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+   
+        color: #fff;
+        text-shadow:
+          0 0 7px #fff,
+          0 0 10px #fff,
+          0 0 21px #fff,
+          0 0 42px gold,
+          0 0 82px gold,
+          0 0 92px gold,
+          0 0 102px gold,
+          0 0 151px gold;
+      
+}
+
+h2{ font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+   
+        color: #fff;
+        text-shadow:
+          0 0 7px #fff,
+          0 0 10px #fff,
+          0 0 21px #fff,
+          0 0 42px gold,
+          0 0 82px gold,
+          0 0 92px gold,
+          0 0 102px gold,
+          0 0 151px gold;
+
+}
+
+.submitstyle{
+    
+}
+
+#weatherDiv{
+background-color:silver;
+border: 9px dashed gold;
+box-shadow: 5px 5px 5px white;
+margin: 12rem;
+}
+
+
+#searchDiv{
+    background-color: silver;
+    border: 9px dashed gold;  
+    box-shadow: 5px 5px 5px white;
+    margin-bottom: 12rem;
+}
+
+#planetCardContainer{
+    margin: 12rem;
+}
+
+.ui.grid.planetcard{
+    margin-bottom: 12rem;
+}
+
+.planetcard { 
+    background-color:silver;
+    border: 9px dashed gold;
+    box-shadow: 5px 5px 5px white;
 } 
 
 .planetcard:hover {
-    box-shadow: 100px 100px 100px 100px black;
-    border: 9px solid silver;
+    box-shadow: 100px 100px 100px 100px gold;
+    border: 9px dashed white;
     animation: glow 1s ease-in-out infinite alternate;
 }
 

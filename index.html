@@ -5,6 +5,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Clear Planet</title>
+      <link rel="stylesheet" href="./assets/CSS/reset.css">
       <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
       <link rel="stylesheet" type="text/css" href="./assets/styles/styles.css"/>
   </head>
@@ -12,7 +13,7 @@
 
   <body>
     <header>
-      <h1>Page Title</h1>
+      <h1>Clear Sky</h1>
     </header>
     
     <div class="ui grid">
@@ -20,8 +21,12 @@
         <form>
           <input type="text" placeholder="Location Search" id="searchBox" name="searchBox">
           <label for="searchBox">Search For Your Location</label>
+
+          <input type="submit" class="submitstyle" value="Search">
+
           <input type="submit" value="Search">
           <p id="errorBox"></p>
+
         </form>
 
         <div id="searchHistoryDiv">
@@ -30,12 +35,15 @@
       </div>
 
 
-
-      <div class="twelve wide column" id="contentDiv">
+      
+      <div class="twelve wide column " id="contentDiv">
         <div class="ui grid" id="weatherDiv">
+
+          <h2>Your weather conditions for </h2>
           <div id="weatherTempDiv" class="five wide column invisible">Temp: <span id="weatherTemp"></span>°C</div>
           <div id="weatherConditionDiv" class="five wide column invisible">Weather Condition: <span id="weatherCondition"></span></div>
           <div class="six wide column"><img class="hidden" src="" alt="an image of the current weather conditions" id="weatherIcon"></div>
+
         </div>
       
         <!--The below is a placeholder for demo purposes. all of this will be created dynamically-->

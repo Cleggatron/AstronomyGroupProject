@@ -37,9 +37,10 @@ function generateEndpointWeather (city) {
 //this function takes the url in "endpointWeather" and fetches it. The data is then turned into an object, ready for us to use it however we please
 function makeApiRequest (weatherUrl) {
 
+
     fetch(weatherUrl) //fetches the data from the url
-    
     .then(function(res) {
+
 
         if(res.ok){
             res.json()
