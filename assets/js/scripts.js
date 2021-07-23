@@ -158,10 +158,10 @@ function clickSearchButton(event) {
 
 //function to build the content of our planet cards
 function buildCards(planetData){
-    var contentDivEl = document.getElementById("planetCardContainer"); //gets the div that contains all the planet cards
-    contentDivEl.innerHTML = ""; //we clear it out, ready for our data
-   // console.log(planetData) //shows us planet data 
 
+    var contentDivEl = document.getElementById("planetCardContainer");
+    contentDivEl.innerHTML = "";
+  
     for(var i = 0; i < planetData.data.length; i++){  //We loop this for the amount of planets visible to the user
         
         var planetCardEl = document.createElement("div");  //we make a div container for each card
@@ -195,7 +195,8 @@ function buildCards(planetData){
         planetBioEl.textContent = planetList[planetData.data[i].name] //assigns the div the text that is inside the object array at the top of the JS. It will check the name first so it gets the right one
         planetCardEl.appendChild(planetBioEl);
 
-        var planetImgEl = document.createElement("img"); //creates an img tag for each planet card
+        var planetImgEl = document.createElement("img");
+
         planetImgEl.setAttribute("class", "six wide column");
         planetImgEl.setAttribute("src"  , `./assets/img/planet-img/${planetData.data[i].name}.jpg`);//the image source is a variable that changes based on the name of the planet 
         planetImgEl.setAttribute("alt", "Picture of"); //add the alt text with a variable

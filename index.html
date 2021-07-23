@@ -15,12 +15,14 @@
     <header>
       <h1>Clear Sky</h1>
     </header>
+
+    
     
     <div class="ui grid" id="main">
       <div class="four wide column" id="searchDiv">
         <form>
-          <input type="text" placeholder="Location Search" id="searchBox" name="searchBox">
           <label for="searchBox ">Search For Your Location</label>
+          <input type="text" placeholder="Location Search" id="searchBox" name="searchBox">
 
           <input type="submit" class="submitstyle" value="Search">
           <p class="text-bold" id="errorBox"></p>
@@ -36,6 +38,16 @@
 
       
       <div class="twelve wide column " id="contentDiv">
+        <div class="ui grid" id="bio">
+
+            <p class="quest">Welcome to Clear Sky!</p>
+            <p class="quest">What is Clear Sky?</p>
+            <p>Simple if you need to know the weather conditions and the location of planets for a night of star gazing your in the right place!</p>
+            <p class="quest">But what does it mean if a planet doesn't show when I search or I get no planets?</p>
+            <p>We would be sad :), but it just means based on your current search criteria no planets are visible. You could always ask to hitch a ride with Virgin!</p>
+
+        </div>
+
         <div class="ui grid" id="weatherDiv">
           <h2>This is the weather for <span id=city></span></h2>
           <div id="weatherTempDiv" class="five wide column invisible text-bold">Temp: <span id="weatherTemp"></span>°C</div>
@@ -43,6 +55,7 @@
           <div class="six wide column"><img class="hidden" src="" alt="an image of the current weather conditions" id="weatherIcon"></div>
 
         </div>
+
       
         <!--The below is a placeholder for demo purposes. all of this will be created dynamically-->
         <div class="ui grid" id="planetCardContainer">  
