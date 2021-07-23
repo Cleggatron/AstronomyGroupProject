@@ -49,6 +49,11 @@ Here is a link to their github repo:
 
 https://github.com/csymlstd/visible-planets-api
 
+We also used a framework called Semantic UI.
+Here is a link to their website:
+
+https://semantic-ui.com/elements/container.html#/examples
+
 ## License
 
 MIT License
