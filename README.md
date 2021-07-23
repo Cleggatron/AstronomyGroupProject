@@ -6,6 +6,8 @@ https://cleggatron.github.io/AstronomyGroupProject/
 
 ## Screenshot Of Project
 
+<img src="./assets/img/utility-img/Screenshot.jpg" alt="A screenshot of the website in action">
+
 ## Description
 
 Our motivation for this project was to make a website as group in order to aquire a basic understanding of how coding in a team would work in the industry. We decided on a multi-Api website that aquired planetary and weather data.
