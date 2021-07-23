@@ -1,15 +1,15 @@
-var searchFormEl = document.querySelector("form")
-var searchBoxEl = document.querySelector("#searchBox")
-var lat = 0;
+var searchFormEl = document.querySelector("form") //this selects the first form element, this is the container for our search box
+var searchBoxEl = document.querySelector("#searchBox") //this selects the search box element in our html
+var lat = 0; //we create the variables lat and lon, and then assign them 0. This is so we can use them later
 var lon = 0;
-var weatherTempEL = document.getElementById('weatherTemp');
-var weatherConditionEL = document.getElementById('weatherCondition');
-var weatherIconEL = document.getElementById('weatherIcon');
-var weatherTempDivEL = document.getElementById('weatherTempDiv')
-var weatherConditionDivEL = document.getElementById('weatherConditionDiv')   
-var searchHistoryEl = document.getElementById('searchHistoryDiv')
-var errorBoxEl =  document.getElementById("errorBox");
-var yourcity= document.getElementById("city")
+var weatherTempEL = document.getElementById('weatherTemp'); //We get the span element that lists our weather temperature in our html
+var weatherConditionEL = document.getElementById('weatherCondition'); //we get the span element that lists our weather conditions in our html
+var weatherIconEL = document.getElementById('weatherIcon'); //we get the element that lists the weather icon in our html
+var weatherTempDivEL = document.getElementById('weatherTempDiv') //This element contains the span of the temp element 
+var weatherConditionDivEL = document.getElementById('weatherConditionDiv')    //this element contains the span of the condition element
+var searchHistoryEl = document.getElementById('searchHistoryDiv') //This contains our search history in the html
+var errorBoxEl =  document.getElementById("errorBox"); //This element is for text that appears should the user type in a location that isn't valid
+var yourCity= document.getElementById("city") //grabs the span for the city that is inside our weather data. We use it to show the location that the user typed in
 
 
 //This is an object of all the planet descriptions and facts. This is so that we can then access it later in our generate card function
@@ -27,7 +27,7 @@ var planetList = {
 
 //this function makes a URL from the location that the user will input into the search bar. The URL is then assigned to the variable "endpointWeather"
 function generateEndpointWeather (city) {
-     //makes a variable and assigns it whatever the user types into the search box
+     //makes a variable and assigns it a url containing whatever city the user types into the search box as a query
     
     var endpointWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=aa891061c4eb5441b7aab33d1b619398&units=metric` 
 
@@ -43,10 +43,10 @@ function makeApiRequest (weatherUrl) {
     .then(function(res) {
 
 
-        if(res.ok){
+        if(res.ok){   //if the response of the api server is fine then it continues as normal. If not it returns an error asking for a valid location
             res.json()
             .then(function(weatherData) {
-                console.log(weatherData); //shows lat/lon
+               // console.log(weatherData); //shows lat/lon
         
                 //We assign the lattitude and longitude of the location chosen by the user into the "lat" and "lon" variables. This is so we can use the values in our planet API
                 lon = weatherData.city.coord.lon
@@ -59,17 +59,14 @@ function makeApiRequest (weatherUrl) {
             var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
             weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
         
-            weatherTempDivEL.classList.remove('invisible')
+            //finally we unhide the weather elements so that the user can see them
+            weatherTempDivEL.classList.remove('invisible') 
             weatherConditionDivEL.classList.remove('invisible')
             weatherIconEL.classList.remove('hidden')
-            //this code adds weather data from the API to the the elements in our html
-            console.log(weatherData.city.name)
-            yourcity.innerText = weatherData.city.name
-            weatherConditionEL.innerText = weatherData.list[0].weather[0].main
-            weatherTempEL.innerText = weatherData.list[0].main.temp
-            var weatherIconCode = weatherData.list[0].weather[0].icon //here we make a variable and set it to have the icon code of the current weather
-            var iconMainUrl = "http://openweathermap.org/img/w/" + weatherIconCode + ".png"; //we then make a url using the icon code that we get from the previous variable
-            weatherIconEL.src = iconMainUrl //finally we assign the url to the src of our weather icon html element 
+
+            //this code takes the city name of our weather data and assigns it to the inner text of yourCity. This means in the weather div it will show the user the location they are viewing for
+            yourCity.innerText = weatherData.city.name
+           
             })
             .then(function() {
         
@@ -84,10 +81,10 @@ function makeApiRequest (weatherUrl) {
         
             .then(function (apiPlanetData){
         
-                console.log(apiPlanetData); //shows planets
-                buildCards(apiPlanetData)
+                //console.log(apiPlanetData); //shows planets
+                buildCards(apiPlanetData) //runs the buildCards function, this should create the planet data cards
             })
-        } else {
+        } else { //this runs only if the api response returns and invalid response. It hides the weather data and returns an error message
             errorBoxEl.textContent = "Please Enter A Valid Location"
 
             //hide our weather data.
@@ -99,25 +96,26 @@ function makeApiRequest (weatherUrl) {
     }) 
 }
 
-//function to update search history in local storage. to-do check where we are getting input.
+//function to update search history in local storage
 function updateSearchHistoryLS(searchInput){
-    var searchHistoryLS = JSON.parse(localStorage.getItem("searchHistory"));
+    var searchHistoryLS = JSON.parse(localStorage.getItem("searchHistory")); //makes a variable and assigns it the object for the search history
+
     //deals with no search history
     if(searchHistoryLS === null){
-        var searchHistoryLS = []
-        searchHistoryLS.push(searchInput);
+        var searchHistoryLS = [] //if there is no search history then make an empty array and assign it to this variable
+        searchHistoryLS.push(searchInput); //then push the unputted city to that array
     }else{
         //deal with repeats in search history. Clears the repeat out. 
-        for(var i = 0; i < searchHistoryLS.length; i++){
-            if(searchHistoryLS[i] === searchInput){
-                searchHistoryLS.splice(i, 1);
+        for(var i = 0; i < searchHistoryLS.length; i++){ 
+            if(searchHistoryLS[i] === searchInput){ //loops through and checks the history for any names that are identical to the searched location
+                searchHistoryLS.splice(i, 1); //if it finds one then the old location is removed and the new one is added to the top of the history
                 break;
             }
         }
         //add the new item to the search history
         searchHistoryLS.unshift(searchInput)
     }
-    localStorage.setItem("searchHistory", JSON.stringify(searchHistoryLS));
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistoryLS)); //we then assign the stringified search history to our search history element
 }
 
 // populates our search history to-do update variable name for search history.
