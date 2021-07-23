@@ -118,14 +118,14 @@ function updateSearchHistoryLS(searchInput){
     localStorage.setItem("searchHistory", JSON.stringify(searchHistoryLS)); //we then assign the stringified search history to our search history element
 }
 
-// populates our search history to-do update variable name for search history.
+// populates our search history
 function populateSearchHistory(){
-    var searchHistoryEl = document.getElementById("searchHistoryDiv"); 
+    var searchHistoryEl = document.getElementById("searchHistoryDiv"); //get the search history div from our html
     //clear out search history
-    searchHistoryEl.innerHTML = "";
-    var searchHistoryLs = JSON.parse(localStorage.getItem("searchHistory"));
+    searchHistoryEl.innerHTML = ""; 
+    var searchHistoryLs = JSON.parse(localStorage.getItem("searchHistory")); //we make a variable and assign it data from our search history 
 
-    for(var i = 0; i < searchHistoryLs.length; i++){
+    for(var i = 0; i < searchHistoryLs.length; i++){ //we then loop through it and create a p element for each item in the search history
         var text = document.createElement("p");
         text.textContent = searchHistoryLs[i];
         searchHistoryEl.appendChild(text);
@@ -136,10 +136,10 @@ function populateSearchHistory(){
 function clickSearchButton(event) {
     event.preventDefault(); //stops page refreshing  
 
-    var searchedCity = searchBoxEl.value;
+    var searchedCity = searchBoxEl.value; //makes a new variable and assigns it the value of the search box
 
-    var planetCardContainerEl = document.getElementById("planetCardContainer")
-    planetCardContainerEl.innerHTML = "";
+    var planetCardContainerEl = document.getElementById("planetCardContainer") //gets our planet card container from our html
+    planetCardContainerEl.innerHTML = ""; //clears the inner html, ready for us to input our own data
 
     
     //handles any blank input
@@ -147,20 +147,20 @@ function clickSearchButton(event) {
         errorBoxEl.textContent = "You have not entered a location!"
         return;
     }
-    errorBoxEl.textContent = "";
+    errorBoxEl.textContent = ""; //clears the search bar after use
 
-    var weatherURL = generateEndpointWeather(searchedCity);
-    makeApiRequest(weatherURL);
-    updateSearchHistoryLS(searchedCity)
-    populateSearchHistory();
+    var weatherURL = generateEndpointWeather(searchedCity); //assigns the result of generateEndpointWeather to our weatherURL
+    makeApiRequest(weatherURL); //makes an api request using the URL in weatherURL
+    updateSearchHistoryLS(searchedCity) //updates the search history with the user inputted location
+    populateSearchHistory(); //populates the search history with all the inputted locations
 
 }
 
-//function to build the content of our planet cards. to-do "will need content fixing", 
+//function to build the content of our planet cards
 function buildCards(planetData){
-    var contentDivEl = document.getElementById("planetCardContainer");
-    contentDivEl.innerHTML = "";
-    console.log(planetData)
+    var contentDivEl = document.getElementById("planetCardContainer"); //gets the div that contains all the planet cards
+    contentDivEl.innerHTML = ""; //we clear it out, ready for our data
+   // console.log(planetData) //shows us planet data 
 
     for(var i = 0; i < planetData.data.length; i++){  //We loop this for the amount of planets visible to the user
         
@@ -168,63 +168,66 @@ function buildCards(planetData){
         planetCardEl.setAttribute("class", "ui grid planetcard"); //we then set some classes to the div in order to position it
         contentDivEl.appendChild(planetCardEl); //we finally assign the div container to the planet card container of all the divs
 
-        var planetNameEl = document.createElement("h3");
+        var planetNameEl = document.createElement("h3"); //we make a h3 for each planet and assign it the name of said planet
         planetNameEl.textContent = planetData.data[i].name //Use a variable from our data
-        planetNameEl.setAttribute("class", "sixteen wide column");
-        planetCardEl.appendChild(planetNameEl);
+        planetNameEl.setAttribute("class", "sixteen wide column"); //more classes to position it
+        planetCardEl.appendChild(planetNameEl); //finally we add it to the planet card
 
-        var planetInfoEl = document.createElement("div");
+        var planetInfoEl = document.createElement("div"); //we make a div for each planet card that will contain the planets location
         planetInfoEl.setAttribute("class", "five wide column");
         var planetLocationEl = document.createElement("h3");
         planetLocationEl.textContent = "Planet Location"
         
+        //here we create some p elements and assign them data from out api so that users can see the location of the planets
         var rightAscensionEl = document.createElement("p")
         rightAscensionEl.textContent = "Right Ascension: " + planetData.data[i].rightAscension.hours + " Hours " + planetData.data[i].rightAscension.minutes + " Minutes " + planetData.data[i].rightAscension.seconds + " Seconds";
         
         var declinationEl = document.createElement("p")
         declinationEl.textContent = "Declination: " + planetData.data[i].declination.degrees + " Degrees."
 
-        planetInfoEl.appendChild(planetLocationEl);
+        planetInfoEl.appendChild(planetLocationEl); //finally we append all this info to the planetInfo div and append that div to the planet card
         planetInfoEl.appendChild(rightAscensionEl);
         planetInfoEl.appendChild(declinationEl);
         planetCardEl.appendChild(planetInfoEl);
 
-        var planetBioEl = document.createElement("div");
+        var planetBioEl = document.createElement("div"); //creates a div for each planet card
         planetBioEl.setAttribute("class", "five wide column");
-        planetBioEl.textContent = planetList[planetData.data[i].name]
+        planetBioEl.textContent = planetList[planetData.data[i].name] //assigns the div the text that is inside the object array at the top of the JS. It will check the name first so it gets the right one
         planetCardEl.appendChild(planetBioEl);
 
-        var planetImgEl = document.createElement("img");
+        var planetImgEl = document.createElement("img"); //creates an img tag for each planet card
         planetImgEl.setAttribute("class", "six wide column");
-        planetImgEl.setAttribute("src"  , `./assets/img/planet-img/${planetData.data[i].name}.jpg`);//use a variable for our img source `${lon}`  
+        planetImgEl.setAttribute("src"  , `./assets/img/planet-img/${planetData.data[i].name}.jpg`);//the image source is a variable that changes based on the name of the planet 
         planetImgEl.setAttribute("alt", "Picture of"); //add the alt text with a variable
         planetCardEl.appendChild(planetImgEl);
     }
 
 }
 
+//when the search history is clicked it will use the clicked location to search for planets
 function clickSearchHistory(event){
-    event.preventDefault;
-    var eventTarget = event.target;
+    event.preventDefault; //prevent page refresh
+
+    var eventTarget = event.target; //make a variable and assigns it the value of the clicked element
     
-    //clear previous data
+    //clear previous planet data
     var planetCardContainerEl = document.getElementById("planetCardContainer")
     planetCardContainerEl.innerHTML = "";
 
 
-    //removes old errorm message
+    //removes old error message
     errorBoxEl.textContent = "";
     
-    if(eventTarget.matches("p")){
-        var searchCity = eventTarget.textContent;
-        var weatherURL = generateEndpointWeather(searchCity);
+    if(eventTarget.matches("p")){ //if the clicked element is a p element then:
+        var searchCity = eventTarget.textContent; //make a new variable that is the textcontent of the clicked element
+        var weatherURL = generateEndpointWeather(searchCity); //then run generateEndpointWeather with that textcontent as the parameter and assign to a URL
         
-        makeApiRequest(weatherURL);
-        updateSearchHistoryLS(searchCity)
-        populateSearchHistory();
+        makeApiRequest(weatherURL); //the URL is then used to get an api request for the weather data
+        updateSearchHistoryLS(searchCity) //the search history is updated with the clicked element
+        populateSearchHistory(); //finally the search history gets populated
     }
 }
 
-searchFormEl.addEventListener('submit', clickSearchButton);
-searchHistoryEl.addEventListener("click", clickSearchHistory);
-populateSearchHistory();
+searchFormEl.addEventListener('submit', clickSearchButton);  //an event listener for our search button that runs a function on submit
+searchHistoryEl.addEventListener("click", clickSearchHistory); //an event listener for when we click on any of our search history elements
+populateSearchHistory(); //populates the search history of previous sessions on start-up
