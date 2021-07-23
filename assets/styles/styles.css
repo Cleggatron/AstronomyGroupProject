@@ -29,18 +29,28 @@ h2{ font-size: 24px;
     font-weight: bold;
     font-style: italic;
     text-align: center;
-
 }
 
-.submitstyle{
-    
+h3{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 
 #weatherDiv{
 background-color:silver;
 border: 3px solid gold;
 box-shadow: 5px 5px 5px white;
-margin: 12rem;
+margin: 8rem;
+}
+
+#weatherDiv h2{
+    width: 100%;
 }
 
 
@@ -48,11 +58,12 @@ margin: 12rem;
     background-color: silver;
     border: 3px solid gold;  
     box-shadow: 5px 5px 5px white;
-    margin-bottom: 12rem;
+    margin-bottom: 2rem;
+    
 }
 
 #planetCardContainer{
-    margin: 12rem;
+    margin: 8rem;
 }
 
 .ui.grid.planetcard{
@@ -92,8 +103,100 @@ margin: 12rem;
     visibility: visible;
 }
 
+.text-bold{
+    font-weight: bold;
+}
+
 /* Changes the cursor to a pointer when hovering over seatch history items */
 #searchHistoryDiv p {
     cursor: pointer;
+    text-align: center;
+    margin-top: 0.5rem;
 }
 
+/* Responsive Design */
+@media screen and (max-width: 1000px) {
+    
+    #weatherDiv{
+        margin: 2rem;
+
+    }
+
+    #weatherDiv h2{
+        width: 100%;
+    }
+
+    #planetCardContainer .planetcard .column{
+        width: 50%!important;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    #main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%!important;
+        margin: 0;
+    }
+
+    #searchDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;    
+        width: 95%!important;
+        margin-left: 2.5%!important;
+        margin-right: 2.5%!important;
+        margin-top: 2rem;  
+        margin-bottom: 1rem;
+    }
+
+    #searchDiv form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #searchHistoryDiv{
+        display: none;
+    }
+
+    #contentDiv{
+        display: flex;
+        flex-direction: column;
+        width: 100%!important;
+        justify-content: center;
+    }
+
+    #weatherDiv{
+        margin: 0rem;
+        margin-bottom: 1rem;
+        display: flex;
+        width: 100%!important;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #weatherDiv div{
+        width: 100%!important;
+        text-align: center;
+    }
+
+    #planetCardContainer{
+        margin: 0rem;
+        margin-bottom: 1rem;
+    }
+    
+    #planetCardContainer .planetcard{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+
+    #planetCardContainer .planetcard .column{
+        width: 100%!important;
+    }
+
+}
