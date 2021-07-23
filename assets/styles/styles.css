@@ -21,10 +21,26 @@ h1 {
       
 }
 
-.weathertitlebox{
+#bio{
     display: inline-block;
-    background-color: cadetblue;
+    background-color: silver;
+    border: 3px solid gold;
+    box-shadow: 5px 5px 5px white;
+    margin: 2rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
 }
+
+.quest{
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+
 h2{ font-size: 24px;
     font-weight: bold;
     font-style: italic;
