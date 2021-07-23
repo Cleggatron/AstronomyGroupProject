@@ -160,7 +160,8 @@ function clickSearchButton(event) {
 function buildCards(planetData){
     var contentDivEl = document.getElementById("planetCardContainer");
     contentDivEl.innerHTML = "";
-    console.log(planetData)
+    
+    
 
     for(var i = 0; i < planetData.data.length; i++){  //We loop this for the amount of planets visible to the user
         
@@ -193,6 +194,8 @@ function buildCards(planetData){
         planetBioEl.setAttribute("class", "five wide column");
         planetBioEl.textContent = planetList[planetData.data[i].name]
         planetCardEl.appendChild(planetBioEl);
+
+        console.log(planetData.data[i].name)
 
         var planetImgEl = document.createElement("img");
         planetImgEl.setAttribute("class", "six wide column");
