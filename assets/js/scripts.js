@@ -176,7 +176,7 @@ function buildCards(planetData){
         var planetInfoEl = document.createElement("div"); //we make a div for each planet card that will contain the planets location
         planetInfoEl.setAttribute("class", "five wide column");
         var planetLocationEl = document.createElement("h3");
-        planetLocationEl.textContent = "Planet Location"
+        planetLocationEl.textContent = "Location"
         
         //here we create some p elements and assign them data from out api so that users can see the location of the planets
         var rightAscensionEl = document.createElement("p")
@@ -199,7 +199,7 @@ function buildCards(planetData){
 
         planetImgEl.setAttribute("class", "six wide column");
         planetImgEl.setAttribute("src"  , `./assets/img/planet-img/${planetData.data[i].name}.jpg`);//the image source is a variable that changes based on the name of the planet 
-        planetImgEl.setAttribute("alt", "Picture of"); //add the alt text with a variable
+        planetImgEl.setAttribute("alt", `Picture of ${planetData.data[i].name}`); //add the alt text with a variable
         planetCardEl.appendChild(planetImgEl);
     }
 
