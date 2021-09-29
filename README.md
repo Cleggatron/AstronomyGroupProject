@@ -2,7 +2,7 @@
 
 ## Link To Project
 
-https://cleggatron.github.io/AstronomyGroupProject/
+[Deployed Site](https://cleggatron.github.io/ClearSky/)
 
 ## Screenshot Of Project
 
